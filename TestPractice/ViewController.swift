@@ -25,21 +25,22 @@ class ViewController: UIViewController {
         APIClient().fetchMyMoney { [self] result in
             switch result {
             case let .success(myMoney):
-                switch myMoney {
-                case let value where value > 0:
-                    label.textColor = .red
-                case let value where value == 0:
-                    label.textColor = .black
-                case let value where value < 0:
-                    label.textColor = .green
-                default:
-                    fatalError("Should not be happened.")
-                }
+                label.textColor = MoneyJudge().moneyLevel(amount: myMoney).color
                 label.text = "My money is \(myMoney)"
             case let .failure(error):
                 label.textColor = .black
                 label.text = "Error is \(error)"
             }
+        }
+    }
+}
+
+extension MoneyJudge.Level {
+    var color: UIColor {
+        switch self {
+        case .rich: return .red
+        case .normal: return .black
+        case .poor: return .green
         }
     }
 }
