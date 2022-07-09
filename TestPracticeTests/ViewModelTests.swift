@@ -35,7 +35,8 @@ class ViewModelTests: XCTestCase {
         sut.fetchMyMoney()
         
         // Assertion
-        XCTAssertEqual(spy.capturedAmount, 1)
+        XCTAssertEqual(spy.capturedAmounts, [1])
+        XCTAssertTrue(spy.capturedErrors.isEmpty)
     }
     
     func testFetchFailure() {
@@ -51,19 +52,20 @@ class ViewModelTests: XCTestCase {
         sut.fetchMyMoney()
         
         // Assertion
-        XCTAssertNotNil(spy.capturedError)
+        XCTAssertEqual(spy.capturedAmounts, [])
+        XCTAssertNotNil(spy.capturedErrors.first)
     }
 }
 
 final class SpyDelegate: ViewModelDelegate {
-    private(set) var capturedAmount: Int = 0
-    private(set) var capturedError: Error?
+    private(set) var capturedAmounts: [Int] = []
+    private(set) var capturedErrors: [Error] = []
 
     func viewModel(_ vm: ViewModel, didReceiveMoneyAmount amount: Int) {
-        capturedAmount = amount
+        capturedAmounts.append(amount)
     }
     
     func viewModel(_ vm: ViewModel, didReceiveError error: Error) {
-        capturedError = error
+        capturedErrors.append(error)
     }
 }
