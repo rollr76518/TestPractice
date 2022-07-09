@@ -12,8 +12,9 @@ class ViewModelTests: XCTestCase {
 
     func testInitAndNotNil() {
         // Arrange
-        let dataProvider = FakeDataProvider(result: .success(0))
-        let sut = ViewModel(dataProvider: dataProvider)
+        let sut = ViewModel(dataProvider: { provider in
+            provider(.success(0))
+        })
         
         // Action
         
@@ -23,8 +24,10 @@ class ViewModelTests: XCTestCase {
     
     func testFetchSuccess() {
         // Arrange
-        let dataProvider = FakeDataProvider(result: .success(1))
-        let sut = ViewModel(dataProvider: dataProvider)
+        let sut = ViewModel(dataProvider: { provider in
+            provider(.success(1))
+        })
+
         let spy = SpyDelegate()
         sut.delegate = spy
         
@@ -37,8 +40,10 @@ class ViewModelTests: XCTestCase {
     
     func testFetchFailure() {
         // Arrange
-        let dataProvider = FakeDataProvider(result: .failure(NSError(domain: "", code: 0)))
-        let sut = ViewModel(dataProvider: dataProvider)
+        let sut = ViewModel(dataProvider: { provider in
+            provider(.failure(NSError(domain: "", code: 0)))
+        })
+
         let spy = SpyDelegate()
         sut.delegate = spy
         
@@ -47,18 +52,6 @@ class ViewModelTests: XCTestCase {
         
         // Assertion
         XCTAssertNotNil(spy.capturedError)
-    }
-}
-
-final class FakeDataProvider: ViewModelDataProvider {
-    private let result: Result<Int, Error>
-    
-    init(result: Result<Int, Error>) {
-        self.result = result
-    }
-    
-    func fetchMyMoney(completion: @escaping (Result<Int, Error>) -> Void) {
-        completion(result)
     }
 }
 

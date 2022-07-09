@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     }()
     
     private lazy var vm: ViewModel = {
-        let vm = ViewModel(dataProvider: APIClient())
+        let vm = ViewModel(dataProvider: APIClient().fetchMyMoney)
         vm.delegate = self
         return vm
     }()
@@ -52,5 +52,3 @@ extension MoneyJudge.Level {
         }
     }
 }
-
-extension APIClient: ViewModelDataProvider {}
