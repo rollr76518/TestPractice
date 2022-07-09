@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		94161AFA2879287E00EDC676 /* MoneyJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94161AF92879287E00EDC676 /* MoneyJudge.swift */; };
+		94161AFC287929D200EDC676 /* MoneyJudgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94161AFB287929D200EDC676 /* MoneyJudgeTests.swift */; };
 		947D399B2874669500143C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D399A2874669500143C55 /* AppDelegate.swift */; };
 		947D399D2874669500143C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D399C2874669500143C55 /* SceneDelegate.swift */; };
 		947D399F2874669500143C55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947D399E2874669500143C55 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		94161AF92879287E00EDC676 /* MoneyJudge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyJudge.swift; sourceTree = "<group>"; };
+		94161AFB287929D200EDC676 /* MoneyJudgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyJudgeTests.swift; sourceTree = "<group>"; };
 		947D39972874669500143C55 /* TestPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		947D399A2874669500143C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		947D399C2874669500143C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				947D39B12874669600143C55 /* TestPracticeTests.swift */,
+				94161AFB287929D200EDC676 /* MoneyJudgeTests.swift */,
 			);
 			path = TestPracticeTests;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94161AFC287929D200EDC676 /* MoneyJudgeTests.swift in Sources */,
 				947D39B22874669600143C55 /* TestPracticeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
