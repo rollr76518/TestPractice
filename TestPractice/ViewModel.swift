@@ -12,16 +12,20 @@ protocol ViewModelDelegate: AnyObject {
     func viewModel(_ vm: ViewModel, didReceiveError error: Error)
 }
 
+protocol ViewModelDataProvider {
+    func fetchMyMoney(completion: @escaping (Result<Int, Error>) -> Void)
+}
+
 final class ViewModel {
-    private let apiClient: APIClient
+    private let dataProvider: ViewModelDataProvider        
     weak var delegate: ViewModelDelegate?
     
-    init(apiClient: APIClient) {
-        self.apiClient = apiClient
+    init(dataProvider: ViewModelDataProvider) {
+        self.dataProvider = dataProvider
     }
     
     func fetchMyMoney() {
-        apiClient.fetchMyMoney { [self] result in
+        dataProvider.fetchMyMoney { [self] result in
             switch result {
             case let .success(myMoney):
                 delegate?.viewModel(self, didReceiveMoneyAmount: myMoney)
