@@ -14,6 +14,12 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var vm: ViewModel = {
+        let vm = ViewModel(apiClient: APIClient())
+        vm.delegate = self
+        return vm
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(label)
@@ -21,17 +27,19 @@ class ViewController: UIViewController {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        APIClient().fetchMyMoney { [self] result in
-            switch result {
-            case let .success(myMoney):
-                label.textColor = MoneyJudge().moneyLevel(amount: myMoney).color
-                label.text = "My money is \(myMoney)"
-            case let .failure(error):
-                label.textColor = .black
-                label.text = "Error is \(error)"
-            }
-        }
+        vm.fetchMyMoney()
+    }
+}
+
+extension ViewController: ViewModelDelegate {
+    func viewModel(_ vm: ViewModel, didReceiveMoneyAmount amount: Int) {
+        label.textColor = MoneyJudge().moneyLevel(amount: amount).color
+        label.text = "My money is \(amount)"
+    }
+    
+    func viewModel(_ vm: ViewModel, didReceiveError error: Error) {
+        label.textColor = .black
+        label.text = "Error is \(error)"
     }
 }
 
